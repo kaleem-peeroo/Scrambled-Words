@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        .message {
+            font-size: 100px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .restart-button {
+            font-size: 30px;
+            padding: 15px 30px;
+            border: 2px solid #333;
+            background-color: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">Game Over!</div>
+    <a href="/restart" class="restart-button">Restart Game</a>
+</body>
+</html>

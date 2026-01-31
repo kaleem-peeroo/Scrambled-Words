@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrambled Words</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            cursor: pointer;
+            position: relative;
+        }
+        .word {
+            font-size: 250px;
+            font-weight: bold;
+            color: {{ color }};
+            position: relative;
+        }
+        .info {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <div class="countdown">{{ word_index + 1 }} / {{ total_words }}</div>
+    </div>
+    <div id="word-container" class="word">{{ word }}</div>
+    <script>
+        document.body.addEventListener('click', function() {
+            window.location.href = "/next";
+        });
+        document.body.addEventListener('keydown', function(event) {
+            if (event.key === ' ' || event.key === 'Enter') {
+                window.location.href = "/next";
+            }
+        });
+
+        const isScrambled = {{ is_scrambled|tojson }};
+        if (!isScrambled) {
+            const wordContainer = document.getElementById('word-container');
+            const rect = wordContainer.getBoundingClientRect();
+            const x = (rect.left + rect.right) / 2 / window.innerWidth;
+            const y = (rect.top + rect.bottom) / 2 / window.innerHeight;
+
+            confetti({
+                origin: { x, y },
+                particleCount: 100,
+                spread: 70,
+                startVelocity: 30,
+                ticks: 200,
+                gravity: 1.2,
+                scalar: 1.2,
+                colors: ['#488f31', '#de425b', '#6f42c1', '#fd7e14', '#ffc107']
+            });
+        }
+    </script>
+</body>
+</html>
